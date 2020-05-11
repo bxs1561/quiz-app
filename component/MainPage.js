@@ -28,8 +28,6 @@ const DataPage = ({navigation}) => {
   const current = QuestionData[currentQuestion].question;
   const [score, setScore] = useState(0);
   const [end, setEnd] = useState(false);
-  const [buttonColor, setButtonColor] = useState(false);
-  const [modal, setModal] = useState(false);
     const sound = new Sound("/Users/bikramsubedi/Desktop/quiz/assets/Untitled.m4a",null)
     // Tts.speak('Hello, world!', {
     //     iosVoiceId: 'com.apple.ttsbundle.Moira-compact',
@@ -44,7 +42,6 @@ const DataPage = ({navigation}) => {
       setEnd(true);
     } else {
       setCurrentQuestion(currentQuestion + 1);
-      setModal(true)
       setScore(score + 1);
 
     }
