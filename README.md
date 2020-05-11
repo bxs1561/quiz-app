@@ -1,5 +1,5 @@
 # quiz-app
 
-![Image of yaktocat]
+![Image description]((https://octodex.github.com/images/yaktocat.png)
 
-(https://octodex.github.com/images/yaktocat.png)
+
