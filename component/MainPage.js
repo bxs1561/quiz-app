@@ -4,7 +4,6 @@ import _ from 'lodash';
 import {Button, Card, Icon} from 'react-native-elements';
 import Sound from 'react-native-sound';
 // import Tts from 'react-native-tts';
-import {Dimensions, Modal, TouchableHighlight} from 'react-native';
 
 
 import {
