@@ -27,6 +27,8 @@ const DataPage = ({navigation}) => {
   const current = QuestionData[currentQuestion].question;
   const [score, setScore] = useState(0);
   const [end, setEnd] = useState(false);
+    const [answe, setAnswe] = useState(false);
+
     const sound = new Sound("/Users/bikramsubedi/Desktop/quiz/assets/Untitled.m4a",null)
     // Tts.speak('Hello, world!', {
     //     iosVoiceId: 'com.apple.ttsbundle.Moira-compact',
@@ -61,7 +63,6 @@ const DataPage = ({navigation}) => {
     return (
 
       <>
-
         <Button
           style={styles.buttonSpace}
           title={QuestionData[currentQuestion].options[0]}
@@ -134,6 +135,28 @@ const DataPage = ({navigation}) => {
             }
           }}
         />
+          <Button
+              style={styles.buttonSpace}
+              title={QuestionData[currentQuestion].options[3]}
+              onPress={() => {
+                  if (
+                      QuestionData[currentQuestion].options[3] ===
+                      QuestionData[currentQuestion].answer
+                  ) {
+                      q1();
+                      setScore(score + 1);
+                  } else {
+                      Alert.alert(
+                          'wrong answer',
+                          'correct answer is' +
+                          ' ' +
+                          QuestionData[currentQuestion].answer,
+                          'ok',
+                      );
+                      setScore(score - 1);
+                  }
+              }}
+          />
         {currentQuestion === QuestionData.length - 1 && (
           <Button title="finish" onPress={() => <Text>color</Text>} />
         )}

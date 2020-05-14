@@ -1,13 +1,18 @@
 import React, {useState, useRef} from 'react';
 import {QuestionData} from './QuestionData';
-import {Card} from 'react-native-elements';
+import {Card, Icon} from 'react-native-elements';
 import Sound from 'react-native-sound';
-import {StyleSheet, Animated, View, Text, Button} from 'react-native';
+import {StyleSheet, Animated, View, Text, Button, TouchableOpacity} from 'react-native';
 
 const Learn = ({navigation}) => {
     const [currentQuestion, setCurrentQuestion] = useState(0);
     const current = QuestionData[currentQuestion].question;
     const fadeAnim = useRef(new Animated.Value(0)).current;
+    const[playing, setplaying] = useState(false)
+
+    const sound = new Sound(QuestionData[currentQuestion].audio, null)
+
+
 
     const fadeIn = () => {
         // Will change fadeAnim value to 1 in 5 seconds
@@ -25,6 +30,25 @@ const Learn = ({navigation}) => {
             useNativeDriver: true
         }).start();
     }
+    const pauseSound = ()=>{
+        sound.pause()
+        setplaying(false)
+    }
+
+    const soundPlay =()=>{
+        sound.play()
+        setplaying(true)
+    }
+
+
+    const play =()=>{
+        if(playing){
+            pauseSound()
+        }
+        else{
+            soundPlay()
+        }
+    }
 
     return(
         // <View style={styles.container}>
@@ -35,7 +59,11 @@ const Learn = ({navigation}) => {
                     </Text>
                 </Card>
                 <View style={{paddingBottom: 15}} />
-
+                <View style={{flexDirection:'row-reverse'}}>
+                    <Icon name='ios-pause' type='ionicon' size={48} color='#444' onPress={()=>sound.pause()}/>
+                    <Text>{'   '}</Text>
+                    <Icon name='ios-play-circle' type='ionicon' size={48} color='#444' onPress={()=>sound.play()}/>
+                </View>
                 <Animated.View
                 style={[
                     {
@@ -54,6 +82,11 @@ const Learn = ({navigation}) => {
                 <Button title="Next" onPress={()=>{fadeOut(),setCurrentQuestion(currentQuestion + 1)}} />
                 </View>
             )}
+                {currentQuestion < QuestionData.length - 1 && currentQuestion > 0 &&  (
+                    <View style={{paddingRight:220, paddingBottom: 10}}>
+                        <Button title="Previous" onPress={()=>{fadeOut(),setCurrentQuestion(currentQuestion - 1)}} />
+                    </View>
+                )}
             {currentQuestion === QuestionData.length - 1 && (
                 <Button title="finish" onPress={()=>{navigation.navigate('Home')}}/>
 
@@ -72,3 +105,4 @@ const styles = StyleSheet.create({
         justifyContent: "center"
     },
 });
+

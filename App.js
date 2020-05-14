@@ -21,6 +21,7 @@ import NepaliPage from './component/NepaliPage';
 import Both from './component/Both';
 import Tabs from './component/Tabs';
 import Learn from './component/Learn';
+import Listen from './component/Listen';
 const App = () => {
   return (
        <NavigationContainer>
